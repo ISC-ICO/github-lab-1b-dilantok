@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -16,7 +17,26 @@ public class Main {
      * @return
      */
     public static boolean checkCode(String guess) {
-        
+        int correctChar = 0;
+        for (int i = 0; i < code.length(); i++) {
+            char check = code.charAt(i);
+            for (int i1 = 0; i < code.length(); i++) {
+                if (check == guess.charAt(i)) {
+                    correctChar += 1;
+                }
+            }
+        }
+
+        int correctRightOrder = 0;
+        for (int i = 0; i < code.length(); i++) {
+            if (code.charAt(i) == guess.charAt(i)) {
+                correctRightOrder += 1;
+            }
+        }
+
+
+
+
         return true;
     }
  
@@ -24,13 +44,23 @@ public class Main {
         System.out.println("Code cracker game");
         code = "";    
         //Write the code to set the length of the code here
+        //I did a scanner to determine to code length and ask user to print it
         Scanner scanner = new Scanner(System.in);
+        System.out.println("How long code length should be?");
+        codeLength = scanner.nextInt();
+        for (int i = 0; i < codeLength; i++) {
+            code += getRandInt();
+        }
+        System.out.println(code);
 
-        //Write the code to set up the candon code to crack here        
+
+        //Write the code to set up the candon code to crack here
+
     
         //Write code for main loop here
-        while (true) {        
-            
+
+        while (true) {
+
             System.out.println(String.format("Code length is %d. Enter your guess: ", codeLength));
             String guess = "";
             do{
@@ -42,10 +72,20 @@ public class Main {
                 System.out.println(String.format("Invalid guess length %d. Try again.", guess.length()));
             } else {
                 if (checkCode(guess)) {
-                    System.out.println("Congratulations! You cracked the code!");
+                    System.out.println("Congratulations, your guess is correct.!");
                     break;
                 }
-            }            
+
+            }
+            }
+
         }
-    }
-}
+
+                }
+
+
+
+
+
+
+
